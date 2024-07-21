@@ -44,6 +44,7 @@ jobs:
         echo "$KUBE_CONFIG_DATA" | base64 --decode > $HOME/.kube/config
         kubectl config set-context --current --namespace=myapp1
 
+
     - name: Deploy to Kubernetes
       run: |
         kubectl apply -f k8s/service-a-deployment.yaml
