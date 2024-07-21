@@ -48,6 +48,10 @@ jobs:
       run: |
         kubectl get namespace myapp1 || kubectl create namespace myapp1
 
+    - name: Delete existing deployment
+      run: | 
+        kubectl delete -f k8s/service-a-deployment.yaml --ignore-not-found
+      
     - name: Deploy to Kubernetes
       run: |
         kubectl apply -f k8s/service-a-deployment.yaml
