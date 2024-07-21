@@ -42,7 +42,11 @@ jobs:
       run: |
         mkdir -p $HOME/.kube
         echo "$KUBE_CONFIG_DATA" | base64 --decode > $HOME/.kube/config
-        kubectl config set-context --current --namespace=myapp1
+        kubectl config
+        
+    - name: Create namespace if not exists
+      run: |
+        kubectl get namespace myapp1 || kubectl create namespace myapp1
 
     - name: Deploy to Kubernetes
       run: |
