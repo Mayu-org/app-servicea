@@ -30,7 +30,7 @@ class ServiceAController {
     @GetMapping("/data")
     @WithSpan
     public String getData() {
-        String serviceBResponse = restTemplate.getForObject("http://service-b.myapp1.svc.cluster.local:8081/info", String.class);
+        String serviceBResponse = restTemplate.getForObject("http://serviceb.myapp1.svc.cluster.local:8081/info", String.class);
         return "Data from Service B: " + serviceBResponse;
     }
 }
