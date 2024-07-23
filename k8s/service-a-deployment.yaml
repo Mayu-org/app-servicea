@@ -24,6 +24,10 @@ kind: Service
 metadata:
   name: servicea
   namespace: myapp1
+  annotations:
+    prometheus.io/scrape: 'true'
+    prometheus.io/path: /actuator/prometheus
+    prometheus.io/port: '8080'
 spec:
   selector:
     app: servicea
