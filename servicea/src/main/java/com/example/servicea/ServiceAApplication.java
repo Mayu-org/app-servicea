@@ -1,7 +1,5 @@
 package com.example.servicea;
 
-
-import io.opentelemetry.instrumentation.annotations.WithSpan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -28,9 +26,11 @@ class ServiceAController {
     }
 
     @GetMapping("/data")
-    @WithSpan
+    
     public String getData() {
         String serviceBResponse = restTemplate.getForObject("http://serviceb.myapp1.svc.cluster.local:8081/info", String.class);
         return "Data from Service B: " + serviceBResponse;
     }
+    
+    
 }
