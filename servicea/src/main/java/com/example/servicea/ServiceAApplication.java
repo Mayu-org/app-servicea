@@ -6,6 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @SpringBootApplication
 public class ServiceAApplication {
@@ -19,6 +21,7 @@ public class ServiceAApplication {
 class ServiceAController {
 
     private final RestTemplate restTemplate;
+    private static final Logger logger = LogManager.getLogger(ServiceAController.class);
 
     @Autowired
     public ServiceAController(RestTemplate restTemplate) {
@@ -28,7 +31,9 @@ class ServiceAController {
     @GetMapping("/data")
     
     public String getData() {
+        logger.info("Fetching data from Service B");
         String serviceBResponse = restTemplate.getForObject("http://serviceb.myapp1.svc.cluster.local:8081/info", String.class);
+        logger.debug("Received response from Service B: {}", serviceBResponse);
         return "Data from Service B: " + serviceBResponse;
     }
     
