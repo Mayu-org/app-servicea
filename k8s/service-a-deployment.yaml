@@ -27,7 +27,7 @@ spec:
         - containerPort: 8080
         env:
         - name: JAVA_TOOL_OPTIONS
-          value: "-javaagent:/otel/otel-java-agent.jar"
+          value: "-javaagent:/otel/otel-java-agent.jar -Dotel.exporter.otlp.endpoint=http://otel-collector.monitoring.svc.cluster.local:4317"
         volumeMounts:
         - name: otel-agent
           mountPath: /otel
