@@ -13,11 +13,27 @@ spec:
       labels:
         app: servicea
     spec:
+      initContainers:
+      - name: download-otel-agent
+        image: busybox:latest
+        command: ['sh', '-c', 'wget -O /otel/otel-java-agent.jar https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/download/v1.21.0/opentelemetry-javaagent.jar']
+        volumeMounts:
+        - name: otel-agent
+          mountPath: /otel
       containers:
       - name: servicea
         image: mayupdocker/app-servicea:latest
         ports:
         - containerPort: 8080
+        env:
+        - name: JAVA_TOOL_OPTIONS
+          value: "-javaagent:/otel/otel-java-agent.jar"
+        volumeMounts:
+        - name: otel-agent
+          mountPath: /otel
+      volumes:
+      - name: otel-agent
+        emptyDir: {}
 ---
 apiVersion: v1
 kind: Service
