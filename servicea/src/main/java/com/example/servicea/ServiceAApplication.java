@@ -9,6 +9,7 @@ import org.springframework.web.client.RestTemplate;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+
 @SpringBootApplication
 public class ServiceAApplication {
 
